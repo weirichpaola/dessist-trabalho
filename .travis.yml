@@ -1,7 +1,13 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - mvn test
+- mvn test
+deploy:
+  provider: heroku
+  api_key:
+    secure: Wljd3aGBxuCL4kuCvC+gLWbK8j6eDUHifIcgRCrWn9gsQjFo6E/eXJFW43HB07shvnfCEg7JgPqAmXf+kyvsJSEo9xZmFP5g8ooGUqEPm2zfxE2d5Z3ErnByoq+yo9GoSmcycU12QlOXsYd/Cufz6x3NYmsul8pw9nkU9dpUsPeYz1crHaNdFsfRYNlYUi7ilIJ/OHB0/Xb10B0uYu0/d++JNGBNsWkRp6zv+biNBIQmbv2tLWgLxpA+Ol4vW3qBac+dQOZc+4zxxndy/H5pYkh3GKeKc7hvMLZSUEEUKCFrBF6WhGLWfu6eQaAxnqUMKSQ5Q8C91wWuqMZ3ejLEMlVWERlmGp1Vnl2kjZwRr33fxAojYQVUvu62JsfEB1XUZQppok1l6Evyu+5Yetk+pLF8wmPegRXqwU/GQZuxv0q7CqpsG6Mipn2udwhHitB+PMnGLPOhLCtJ7CxC+iDwCUznJhjKWvjhFtLFuzcTXriruc637Ozhycga63TnAMUYWRng5yOa/Ad+vysKyNWzSoTuBIt9PDUJyCxu4Tg+tXOSTQyNL4rJ0Rfxjlb+ZQRRslwvBPsnRsiadUbqlq6FAyZU4S88KPI8/grZYmNscLuiSuq04PdHgVwrt9hg6U1hBSn+61LaUv2B8jMDUl8xCzLYHFSnS16l6asAYdIIYxg=
+  app: segmanager-pucrs-staging 
+  on: master
