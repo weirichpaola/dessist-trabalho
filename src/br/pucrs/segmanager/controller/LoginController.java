@@ -38,7 +38,7 @@ public class LoginController {
 		} else {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("usuario", usuarioAux);
-			return "home";
+			return "segurados";
 		}
 	}
 

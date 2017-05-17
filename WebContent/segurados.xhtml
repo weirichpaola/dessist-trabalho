@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Segurados</title>
+</h:head>
+	
+		<ui:composition template="_template_principal.xhtml">
+		
+		<ui:define name="titulo">
+			
+		</ui:define>
+
+		<ui:define name="conteudo">
+		
+			<h:form id="formulario" enctype="multipart/form-data">
+				
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				
+				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true">
+				
+					<p:outputLabel value="Nome" for="nome" style="width:500px;" /> <br />
+					<p:inputText id="nome" value="#{seguradoController.segurado.nome}" maxlength="100" size="55" 
+						required="true" requiredMessage="Campo Obrigatório"/> 
+					<br />
+				
+					<p:outputLabel value="E-mail" for="email" style="width:500px;" /> <br />
+					<p:inputText id="email" value="#{seguradoController.segurado.email}" maxlength="100" size="55" /> 
+					<br />
+					
+					<p:outputLabel value="Telefone" for="telefone"  style="width:500px;" /> <br />
+					<p:inputText id="telefone" value="#{seguradoController.segurado.telefone}" maxlength="20" size="20" /> 
+					<br />
+					
+					<p:outputLabel value="Bônus" for="bonus"  style="width:500px;" /> <br />
+					<p:inputText id="bonus" value="#{seguradoController.segurado.bonus}" maxlength="6" size="10" /> <br /> 
+					<br /> 
+					
+					<p:commandButton value="Salvar" action="#{seguradoController.salvarSegurado}" />
+				
+				</p:panel>
+			
+				<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">
+					<p:column headerText="Nome" sortable="true" sortBy="#{seg.nome}">
+						<h:outputText value="#{seg.nome}" />
+					</p:column>
+					
+					<p:column headerText="E-mail" sortable="true" sortBy="#{seg.email}">
+						<h:outputText value="#{seg.email}" />
+					</p:column>
+					
+					<p:column headerText="Telefone" sortable="true" sortBy="#{seg.telefone}">
+						<h:outputText value="#{seg.telefone}" />
+					</p:column>
+					
+					<p:column headerText="Bônus" sortable="true" sortBy="#{seg.bpnus}">
+						<h:outputText value="#{seg.bonus}" />
+					</p:column>
+					
+				</p:dataTable>
+				
+			</h:form>	
+		</ui:define>
+		
+		</ui:composition>
+		
+</html>

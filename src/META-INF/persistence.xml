@@ -7,6 +7,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	
 		<class>br.pucrs.segmanager.model.Usuario</class>
+		<class>br.pucrs.segmanager.model.Segurado</class>
 	
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	
