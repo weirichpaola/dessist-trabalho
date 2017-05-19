@@ -25,9 +25,6 @@ public class Segurado {
     @SequenceGenerator(name="SEG_SQ_SEGURADO",sequenceName="SEG_SQ_SEGURADO", allocationSize=1, initialValue=1)
 	private Long id;
 	
-//	@Column(name = "ID_PESSOA_FISICA")
-//	private PessoaFisica pessoaFisica;
-
 	@Column(name = "TX_NOME")
 	private String nome;
 	

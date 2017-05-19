@@ -8,6 +8,9 @@
 	
 		<class>br.pucrs.segmanager.model.Usuario</class>
 		<class>br.pucrs.segmanager.model.Segurado</class>
+		<class>br.pucrs.segmanager.model.Seguradora</class>
+		<class>br.pucrs.segmanager.model.Seguro</class>
+		<class>br.pucrs.segmanager.model.Bem</class>
 	
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	

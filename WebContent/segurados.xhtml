@@ -23,7 +23,8 @@
 				
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				
-				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true">
+				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true" 
+					rendered="#{!seguradoController.stExibeRelatorio}">
 				
 					<p:outputLabel value="Nome" for="nome" style="width:500px;" /> <br />
 					<p:inputText id="nome" value="#{seguradoController.segurado.nome}" maxlength="100" size="55" 
@@ -42,28 +43,40 @@
 					<p:inputText id="bonus" value="#{seguradoController.segurado.bonus}" maxlength="6" size="10" /> <br /> 
 					<br /> 
 					
-					<p:commandButton value="Salvar" action="#{seguradoController.salvarSegurado}" />
+					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguradoController.salvarSegurado}" 
+						update="btnSalvar, segurados, formulario"/>
 				
 				</p:panel>
 			
-				<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">
-					<p:column headerText="Nome" sortable="true" sortBy="#{seg.nome}">
-						<h:outputText value="#{seg.nome}" />
-					</p:column>
+				<p:panel id="relatorio"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true"
+					rendered="#{seguradoController.stExibeRelatorio}" >
+					<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">
+						<p:column headerText="Nome" sortable="true" sortBy="#{seg.nome}">
+							<h:outputText value="#{seg.nome}" />
+						</p:column>
+						
+						<p:column headerText="E-mail" sortable="true" sortBy="#{seg.email}">
+							<h:outputText value="#{seg.email}" />
+						</p:column>
+						
+						<p:column headerText="Telefone" sortable="true" sortBy="#{seg.telefone}">
+							<h:outputText value="#{seg.telefone}" />
+						</p:column>
+						
+						<p:column headerText="Bônus" sortable="true" sortBy="#{seg.bonus}">
+							<h:outputText value="#{seg.bonus}" />
+						</p:column>
+						
+						<p:column headerText="Ações" sortable="false" >
+							<p:commandButton id="btnEditar" value="Editar" action="#{seguradoController.editarSegurado(seg)}" 
+						update="segurados, formulario"/> 
+						</p:column>
+						
+					</p:dataTable>
 					
-					<p:column headerText="E-mail" sortable="true" sortBy="#{seg.email}">
-						<h:outputText value="#{seg.email}" />
-					</p:column>
-					
-					<p:column headerText="Telefone" sortable="true" sortBy="#{seg.telefone}">
-						<h:outputText value="#{seg.telefone}" />
-					</p:column>
-					
-					<p:column headerText="Bônus" sortable="true" sortBy="#{seg.bpnus}">
-						<h:outputText value="#{seg.bonus}" />
-					</p:column>
-					
-				</p:dataTable>
+					<p:commandButton value="Adicionar Segurado" action="#{seguradoController.adicionarSegurado}" 
+						update="segurados, formulario"/>
+				</p:panel>
 				
 			</h:form>	
 		</ui:define>

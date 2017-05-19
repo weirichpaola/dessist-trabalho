@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Seguross</title>
+</h:head>
+	
+		<ui:composition template="_template_principal.xhtml">
+		
+		<ui:define name="titulo">
+			
+		</ui:define>
+
+		<ui:define name="conteudo">
+		
+			<h:form id="formulario" enctype="multipart/form-data">
+				
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				
+				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Seguros" toggleable="true" 
+					rendered="#{!seguroController.stExibeRelatorio}">
+					
+					<p:outputLabel for="seguradora" value="Seguradora" />
+		            <p:selectOneMenu id="seguradora" value="#{seguroController.seguradoras}" style="width:200px">
+		                <f:selectItem itemLabel="Selecione a seguradora..." itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{seguroController.seguradoras}" />
+		            </p:selectOneMenu> <br />
+					
+					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguroController.salvarSeguro}" 
+						update="btnSalvar, seguros, formulario, relatorio"/>
+				
+				</p:panel>
+			
+				<p:panel id="relatorio"  collapsed="false" header="Seguros" toggleable="true"
+					rendered="#{seguroController.stExibeRelatorio}" >
+					
+					<p:dataTable id="seguros" var="seg" value="#{seguroController.listSeguros}">
+						
+						
+						<p:column headerText="Segurado" sortable="true" sortBy="#{seg.segurado.nome}">
+							<h:outputText value="#{seg.segurado.nome}" />
+						</p:column>
+						
+						<p:column headerText="Seguradora" sortable="true" sortBy="#{seg.seguradora.nome}">
+							<h:outputText value="#{seg.seguradora.nome}" />
+						</p:column>
+						
+						<p:column headerText="Bem" sortable="true" sortBy="#{seg.bem.descricao}">
+							<h:outputText value="#{seg.bem.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Início Vigência" sortable="true" sortBy="#{seg.dtInicioVigencia}">
+							<h:outputText value="#{seg.dtInicioVigencia}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Fim Vigência" sortable="true" sortBy="#{seg.dtFimVigencia}">
+							<h:outputText value="#{seg.dtFimVigencia}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Valor Seguro" sortable="true" sortBy="#{seg.vlTotal}">
+							<h:outputText value="R$ #{seg.vlTotal}" />
+						</p:column>
+
+
+						<p:column headerText="Ações" sortable="false" >
+							<p:commandButton id="btnEditar" value="Editar" action="#{seguroController.editarSeguro(seg)}" 
+						update="seguros, formulario"/> 
+						</p:column>
+						
+					</p:dataTable>
+					
+					<p:commandButton value="Adicionar Seguro" action="#{seguroController.adicionarSeguro}" 
+						update="seguros, formulario"/>
+				</p:panel>
+				
+			</h:form>	
+		</ui:define>
+		
+		</ui:composition>
+		
+</html>

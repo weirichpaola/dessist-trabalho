@@ -18,6 +18,7 @@ public class SeguradoController {
 	private SeguradoDAO seguradoDAO;
 	
 	private List<Segurado> listSegurados;
+	private boolean stExibeRelatorio = true;
 	
 	
 	@PostConstruct
@@ -33,9 +34,32 @@ public class SeguradoController {
 	 */
 	public String salvarSegurado() {
 		seguradoDAO.save(segurado);
+		segurado = new Segurado();
 		return "segurados";
 	}
-
+	
+	/**
+	 * Seleciona um segurado para edição.
+	 * @param seg
+	 * @return
+	 */
+	public String editarSegurado(Segurado seg)	{
+		System.out.println(seg);
+		segurado = seg;
+		
+		stExibeRelatorio = false;
+		
+		return null;
+	}
+	
+	public String adicionarSegurado()	{
+		segurado = new Segurado();
+		
+		stExibeRelatorio = false;
+		
+		return null;
+	}
+	
 	public Segurado getSegurado() {
 		return segurado;
 	}
@@ -50,6 +74,14 @@ public class SeguradoController {
 
 	public void setListSegurados(List<Segurado> listSegurados) {
 		this.listSegurados = listSegurados;
+	}
+
+	public boolean isStExibeRelatorio() {
+		return stExibeRelatorio;
+	}
+
+	public void setStExibeRelatorio(boolean stExibeRelatorio) {
+		this.stExibeRelatorio = stExibeRelatorio;
 	}
 	
 }
