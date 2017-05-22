@@ -2,6 +2,7 @@
     <wb-module deploy-name="segmanager">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
         <property name="context-root" value="segmanager"/>
         <property name="java-output-path" value="/segmanager/build/classes"/>
     </wb-module>

@@ -19,7 +19,7 @@
 
 		<ui:define name="conteudo">
 		
-			<h:form id="formulario" enctype="multipart/form-data">
+			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'A'}">
 				
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				
@@ -28,7 +28,7 @@
 				
 					<p:outputLabel value="Nome" for="nome" style="width:500px;" /> <br />
 					<p:inputText id="nome" value="#{seguradoController.segurado.nome}" maxlength="100" size="55" 
-						required="true" requiredMessage="Campo Obrigatório"/> 
+						required="true" requiredMessage="Campo Obrigatório" /> 
 					<br />
 				
 					<p:outputLabel value="E-mail" for="email" style="width:500px;" /> <br />
@@ -48,6 +48,7 @@
 				
 				</p:panel>
 			
+				<p:commandButton value="#{loginController.usuario.perfil}"/> <br />
 				<p:panel id="relatorio"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true"
 					rendered="#{seguradoController.stExibeRelatorio}" >
 					<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">

@@ -18,6 +18,7 @@ public class LoginController {
 
 	private Usuario usuario;
 	private UsuarioDAO usuarioDAO;
+	private String perfil;
 	
 	@PostConstruct
 	public void init() {
@@ -36,9 +37,19 @@ public class LoginController {
 					"Usuário/senha incorretos!", ""));
 			return "login";
 		} else {
+			if(usuarioAux.getPerfil().equals("corretor")) {
+				setPerfil("A");
+			} else {
+				setPerfil("C");
+			}
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("usuario", usuarioAux);
-			return "segurados";
+			
+			if(perfil.equals("A")) {
+				return "segurados";
+			} else {
+				return "meusseguros";
+			}
 		}
 	}
 
@@ -48,6 +59,14 @@ public class LoginController {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 	
 }

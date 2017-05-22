@@ -19,21 +19,51 @@
 
 		<ui:define name="conteudo">
 		
-			<h:form id="formulario" enctype="multipart/form-data">
+			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'A'}">
 				
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				
 				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Seguros" toggleable="true" 
 					rendered="#{!seguroController.stExibeRelatorio}">
 					
-					<p:outputLabel for="seguradora" value="Seguradora" />
-		            <p:selectOneMenu id="seguradora" value="#{seguroController.seguradoras}" style="width:200px">
-		                <f:selectItem itemLabel="Selecione a seguradora..." itemValue="" noSelectionOption="true" />
-		                <f:selectItems value="#{seguroController.seguradoras}" />
+					<p:outputLabel for="segurado" value="Segurado" /> <br />
+		            <p:selectOneMenu id="segurado" value="#{seguroController.seguro.segurado}" style="width:200px">
+		                <f:selectItem itemLabel="Selecione o segurado..." itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{seguroController.segurados}" />
 		            </p:selectOneMenu> <br />
 					
+					<p:outputLabel for="seguradora" value="Seguradora" /> <br />
+<!-- 					<p:inputText id="seguradora" value="#{seguroController.seguro.seguradora}"/> -->
+		            <p:selectOneMenu id="seguradora" value="#{seguroController.seguro.seguradora}" style="width:200px" >
+		                <f:selectItem itemLabel="Selecione a seguradora..." itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{seguroController.seguradoras2}" />
+		            </p:selectOneMenu> <br />
+				
+		            
+		            
+		            <p:outputLabel value="Valor Total" for="vlTotal" /> <br />
+						<p:spinner id="vlTotal" min="0" max="999999999" value="#{seguroController.seguro.vlTotal}" /> <br />
+		            
+					<p:outputLabel value="Inicio da Vigência" for="dtInicio" /> <br />
+					<p:calendar id="dtInicio" value="#{seguroController.seguro.dtInicioVigencia}" pattern="dd/MM/yyyy"/> <br />
+					
+					<p:outputLabel value="Fim da Vigência" for="dtFim" /> <br />
+					<p:calendar id="dtFim" value="#{seguroController.seguro.dtFimVigencia}" pattern="dd/MM/yyyy"/> <br />
+					
+					<p:outputLabel value="Data da Emissão" for="dtEmissao" /> <br />
+					<p:calendar id="dtEmissao" value="#{seguroController.seguro.dtEmissao}" pattern="dd/MM/yyyy"/> <br />
+
+					<p:outputLabel value="Apólice" for="apolice" /> <br />
+					<p:inputTextarea id="apolice" value="#{seguroController.seguro.txApolice}" 
+						rows="4" cols="40" maxlength="255" /> <br/>
+
+					<p:outputLabel value="Estado" for="estado" /> <br />
+					<p:inputTextarea id="estado" value="#{seguroController.seguro.txEstado}" 
+						 rows="4" cols="40" maxlength="255" /> <br/>
+						 
 					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguroController.salvarSeguro}" 
-						update="btnSalvar, seguros, formulario, relatorio"/>
+						update="btnSalvar, seguros, formulario, relatorio"/> <br />
+						
 				
 				</p:panel>
 			
@@ -48,11 +78,11 @@
 						</p:column>
 						
 						<p:column headerText="Seguradora" sortable="true" sortBy="#{seg.seguradora.nome}">
-							<h:outputText value="#{seg.seguradora.nome}" />
+							<h:outputText value="#{seg.seguradora}" />
 						</p:column>
 						
 						<p:column headerText="Bem" sortable="true" sortBy="#{seg.bem.descricao}">
-							<h:outputText value="#{seg.bem.descricao}" />
+							<h:outputText value="#{seg.bem}" />
 						</p:column>
 						
 						<p:column headerText="Início Vigência" sortable="true" sortBy="#{seg.dtInicioVigencia}">

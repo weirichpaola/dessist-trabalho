@@ -11,12 +11,16 @@
 		<div id="cabecalho">
 			<h:form>
 				<p:tabMenu activeIndex="#{param.i}">
-				    <p:menuitem value="Segurados" outcome="segurados.xhtml">
+				    <p:menuitem value="Segurados" outcome="segurados.xhtml" rendered="#{loginController.perfil eq 'A'}">
 				        <f:param name="i" value="0" />
 				    </p:menuitem>
 				    
-				    <p:menuitem value="Seguros" outcome="seguros.xhtml">
+				    <p:menuitem value="Seguros" outcome="seguros.xhtml" rendered="#{loginController.perfil eq 'A'}">
 				        <f:param name="i" value="1" />
+				    </p:menuitem>
+				    
+				    <p:menuitem value="Meus Seguros" outcome="seguros.xhtml" rendered="#{loginController.perfil eq 'C'}">
+				        <f:param name="i" value="2" />
 				    </p:menuitem>
 				    
 				</p:tabMenu>

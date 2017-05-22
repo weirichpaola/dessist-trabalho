@@ -1,5 +1,6 @@
 package br.pucrs.segmanager.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.pucrs.segmanager.dao.SeguradoDAO;
 import br.pucrs.segmanager.dao.SeguradoraDAO;
 import br.pucrs.segmanager.dao.SeguroDAO;
+import br.pucrs.segmanager.model.Segurado;
 import br.pucrs.segmanager.model.Seguradora;
 import br.pucrs.segmanager.model.Seguro;
 
@@ -20,8 +23,11 @@ public class SeguroController {
 
 	private Seguro seguro;
 	private SeguroDAO seguroDAO;
+	private SeguradoDAO seguradoDAO;
 	private SeguradoraDAO seguradoraDAO;
-	private Map<String, Seguradora> seguradoras;
+	private Map<String, Seguradora> seguradoras; //exibicao - valor
+	private List<String> seguradoras2; //exibicao - valor
+	private Map<String, Segurado> segurados;
 	
 	private List<Seguro> listSeguros;
 	private boolean stExibeRelatorio = true;
@@ -32,9 +38,18 @@ public class SeguroController {
 		setSeguro(new Seguro());
 		seguroDAO = new SeguroDAO();
 		seguradoraDAO = new SeguradoraDAO();
+		seguradoDAO = new SeguradoDAO();
+		
+		setSegurados(new HashMap<String, Segurado>());
 		setSeguradoras(new HashMap<String, Seguradora>());
+		setSeguradoras2(new ArrayList<String>());
 		
 		setListSeguros(seguroDAO.findAll(new Seguro()));
+				
+		for(Object s : seguradoDAO.findAll(new Segurado())) {
+			Segurado aux = (Segurado) s;
+			getSegurados().put(aux.getNome(), aux);
+		}
 		
 		for(Object s : seguradoraDAO.findAll(new Seguradora())) {
 			Seguradora aux = (Seguradora) s;
@@ -101,6 +116,22 @@ public class SeguroController {
 
 	public void setSeguradoras(Map<String, Seguradora> seguradoras) {
 		this.seguradoras = seguradoras;
+	}
+
+	public Map<String, Segurado> getSegurados() {
+		return segurados;
+	}
+
+	public void setSegurados(Map<String, Segurado> segurados) {
+		this.segurados = segurados;
+	}
+
+	public List<String> getSeguradoras2() {
+		return seguradoras2;
+	}
+
+	public void setSeguradoras2(List<String> seguradoras2) {
+		this.seguradoras2 = seguradoras2;
 	}
 	
 }

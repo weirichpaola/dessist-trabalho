@@ -5,19 +5,19 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.pucrs.segmanager.dao.SeguradoraDAO;
-import br.pucrs.segmanager.model.Seguradora;
+import br.pucrs.segmanager.dao.SeguradoDAO;
+import br.pucrs.segmanager.model.Segurado;
 
-@FacesConverter(forClass = Seguradora.class)
-public class SeguradoraConverter implements Converter {
+@FacesConverter(forClass = Segurado.class)
+public class SeguradoConverter implements Converter {
 	    
 	@Override
 	    public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
 	        if (value != null && !value.isEmpty()) {
-	        	SeguradoraDAO dao = new SeguradoraDAO();
-	        	Seguradora seguradora = new Seguradora();
-	        	seguradora.setId(Long.valueOf(value));
-	        	Seguradora aux = dao.findByOneFilter(seguradora);
+	        	SeguradoDAO dao = new SeguradoDAO();
+	        	Segurado segurado = new Segurado();
+	        	segurado.setId(Long.valueOf(value));
+	        	Segurado aux = dao.findByOneFilter(segurado);
 	        	
 	            return aux;
 	        }
@@ -26,9 +26,9 @@ public class SeguradoraConverter implements Converter {
 
 	    @Override
 	    public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
-	        if (value instanceof Seguradora) {
-	        	Seguradora entity = (Seguradora) value;
-	            if (entity != null && entity instanceof Seguradora && entity.getId() != null) {
+	        if (value instanceof Segurado) {
+	        	Segurado entity = (Segurado) value;
+	            if (entity != null && entity instanceof Segurado && entity.getId() != null) {
 	                uiComponent.getAttributes().put( entity.getId().toString(), entity);
 	                return entity.getId().toString();
 	            }

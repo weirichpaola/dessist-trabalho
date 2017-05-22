@@ -32,11 +32,13 @@ public class Seguro {
 	@JoinColumn(name = "ID_SEGURADO")
 	private Segurado segurado;
 	
+	//TODO: Para a próxima versão, será criados objetos para as Seguradoras
 	@JoinColumn(name="ID_SEGURADORA")
 	private Seguradora seguradora;
 	
-	@JoinColumn(name="ID_BEM")
-	private Bem bem;
+	//TODO: Para a próxima versão, será criados objetos para os Bens
+	@Column(name="TX_BEM")
+	private String bem;
 	
 	@Column(name="VL_TOTAL")
 	private BigDecimal vlTotal;
@@ -89,11 +91,11 @@ public class Seguro {
 		this.seguradora = seguradora;
 	}
 
-	public Bem getBem() {
+	public String getBem() {
 		return bem;
 	}
 
-	public void setBem(Bem bem) {
+	public void setBem(String bem) {
 		this.bem = bem;
 	}
 
