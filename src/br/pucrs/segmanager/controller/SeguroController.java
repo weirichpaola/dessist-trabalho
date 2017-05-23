@@ -67,11 +67,46 @@ public class SeguroController {
 	 * @return 
 	 */
 	public String salvarSeguro() {
-		seguroDAO.save(seguro);
+		beforeSave();
+		boolean temErro = false;
+		try {
+			seguroDAO.save(seguro);
+		} catch (Exception e) {
+			temErro = true;
+		}
+		
+		if(temErro) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro inesperado, por favor, contate o suporte!");
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+			throw new RuntimeException("");
+		} else {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro salvo com sucesso!" );
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		}
 		seguro = new Seguro();
 		return "seguros";
 	}
 	
+	public String cancelar() {
+		return "seguros";
+	}
+	
+	private void beforeSave() {
+		if(seguro.getDtInicioVigencia().after(seguro.getDtFimVigencia())) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "A data inicial deve ser maior que a data final!");
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+			throw new RuntimeException("");
+		}
+		
+	}
+
 	/**
 	 * Método que remover um Seguro
 	 * @return 

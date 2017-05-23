@@ -26,6 +26,8 @@
 				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Seguros" toggleable="true" 
 					rendered="#{!seguroController.stExibeRelatorio}">
 					
+					<p:growl/>
+					
 					<p:outputLabel for="segurado" value="Segurado" /> <br />
 		            <p:selectOneMenu id="segurado" value="#{seguroController.seguro.segurado}" 
 		            	required="true" style="width:200px">
@@ -40,7 +42,8 @@
 		                <f:selectItems value="#{seguroController.seguradoras}" />
 		            </p:selectOneMenu> <br />
 				
-		            
+					<p:outputLabel value="Bem" for="bem" /> <br />
+					<p:inputText id="bem" value="#{seguroController.seguro.bem}" maxlength="255" required="true"/> <br/>		            
 		            
 		            <p:outputLabel value="Valor Total" for="vlTotal" /> <br />
 						<p:spinner id="vlTotal" min="0" max="999999999" value="#{seguroController.seguro.vlTotal}" 
@@ -67,9 +70,13 @@
 						 rows="4" cols="40" maxlength="255" /> <br/>
 						 
 					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguroController.salvarSeguro}" 
-						update="btnSalvar, seguros, formulario, relatorio"/> <br />
+						update="btnSalvar, seguros, formulario, relatorio"/> 
+						
 					<p:commandButton id="btnRemover" value="Remover" action="#{seguroController.removerSeguro}" 
-						update="btnRemover, seguros, formulario, relatorio"/> <br />
+						update="btnRemover, seguros, formulario, relatorio"/> 
+						
+					<p:commandButton id="btnCancelar" value="Cancelar" action="#{seguroController.cancelar}" 
+						update="btnRemover, seguros, formulario, relatorio" immediate="true"/> <br />
 						
 				
 				</p:panel>
@@ -80,11 +87,11 @@
 					<p:dataTable id="seguros" var="seg" value="#{seguroController.listSeguros}">
 						
 						
-						<p:column headerText="Segurado" sortable="true" sortBy="#{seg.segurado.nome}">
+						<p:column headerText="Segurado" sortable="true" sortBy="#{seg.segurado.nome}" width="23%">
 							<h:outputText value="#{seg.segurado.nome}" />
 						</p:column>
 						
-						<p:column headerText="Seguradora" sortable="true" sortBy="#{seg.seguradora.nome}">
+						<p:column headerText="Seguradora" sortable="true" sortBy="#{seg.seguradora.nome}" width="20%">
 							<h:outputText value="#{seg.seguradora.nome}" />
 						</p:column>
 						
@@ -92,24 +99,24 @@
 							<h:outputText value="#{seg.bem}" />
 						</p:column>
 						
-						<p:column headerText="Início Vigência" sortable="true" sortBy="#{seg.dtInicioVigencia}">
+						<p:column headerText="Início Vigência" sortable="true" sortBy="#{seg.dtInicioVigencia}" width="13%">
 							<h:outputText value="#{seg.dtInicioVigencia}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 						</p:column>
 						
-						<p:column headerText="Fim Vigência" sortable="true" sortBy="#{seg.dtFimVigencia}">
+						<p:column headerText="Fim Vigência" sortable="true" sortBy="#{seg.dtFimVigencia}" width="12%">
 							<h:outputText value="#{seg.dtFimVigencia}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 						</p:column>
 						
-						<p:column headerText="Valor Seguro" sortable="true" sortBy="#{seg.vlTotal}">
+						<p:column headerText="Valor" sortable="true" sortBy="#{seg.vlTotal}" width="10%">
 							<h:outputText value="R$ #{seg.vlTotal}" />
 						</p:column>
 
 
-						<p:column headerText="Ações" sortable="false" >
+						<p:column headerText="Ações" sortable="false" width="8%">
 							<p:commandButton id="btnEditar" value="Editar" action="#{seguroController.editarSeguro(seg)}" 
 						update="seguros, formulario"/> 
 						</p:column>

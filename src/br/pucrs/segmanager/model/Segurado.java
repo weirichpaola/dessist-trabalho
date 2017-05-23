@@ -36,6 +36,9 @@ public class Segurado {
 	
 	@Column(name="VL_BONUS")
 	private BigDecimal bonus;
+	
+	@Column(name="TX_CPF")
+	private String cpf;
 
 	public Long getId() {
 		return id;
@@ -108,6 +111,14 @@ public class Segurado {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 }

@@ -10,30 +10,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>LOGIN</title>
 </h:head>
-	<h:body>
-		<h:form id="formulario" style="align:center;">
+		<h:form id="formulario" enctype="multipart/form-data" style="align:center;" >
 			
 		<p:panel header="Login" resizable="false" style="width:400px;">
-		
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="username" value="Usuário:" />
-            <p:inputText id="username" value="#{loginController.usuario.email}" required="true" />
- 
-            <h:outputLabel for="password" value="Senha:" />
-            <p:password id="password" value="#{loginController.usuario.senha}" required="true" />
-			<br />
-			
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-			
-            <f:facet name="footer">
-                <p:commandButton value="Login" action="#{loginController.logar}"/>
-                
-            </f:facet>
-            
-              
-        </h:panelGrid>
-    </p:panel>
+
+				<p:messages />
+	        
+	            <h:outputLabel for="username" value="Usuário:" /> <br />
+	            <p:inputText id="username" value="#{loginController.usuario.email}" required="true" /> <br />
+	 
+	            <h:outputLabel for="password" value="Senha:" /> <br />
+	            <p:password id="password" value="#{loginController.usuario.senha}" required="true" requiredMessage="cam"/> <br />
+				<br />
+				
+	            <p:commandButton value="Login" action="#{loginController.logar}" update="username, password"/>
+	              
+    	</p:panel>
 							
 		</h:form>
-	</h:body>		
 </html>

@@ -30,4 +30,27 @@ public class SeguradoDAO<E> extends GenericDAO<E>{
 		return segurado;
 	}
 	
+	public Segurado findByCpf(Segurado example) {
+		StringBuilder hql = new StringBuilder();
+		
+		hql.append("select s ");
+		hql.append("  from Segurado s ");
+		hql.append(" where s.cpf = :cpf ");
+		
+		Query query = em.createQuery(hql.toString());
+		
+		query.setParameter("cpf", example.getCpf());
+		
+		Segurado segurado = null;
+		
+		try {
+			segurado = (Segurado) query.getSingleResult();
+		} catch (NoResultException e) {
+		}
+		
+		return segurado;
+	}
+	
+	
+	
 }

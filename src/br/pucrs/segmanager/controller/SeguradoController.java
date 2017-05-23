@@ -1,5 +1,7 @@
 package br.pucrs.segmanager.controller;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,8 +23,10 @@ public class SeguradoController {
 
 	private Segurado segurado;
 	private SeguradoDAO seguradoDAO;
+	private String cpfEdicao;
 	
 	private List<Segurado> listSegurados;
+	private List<Segurado> listSeguradosFiltrados;
 	private boolean stExibeRelatorio = true;
 	
 	
@@ -30,7 +34,9 @@ public class SeguradoController {
 	public void init() {
 		setSegurado(new Segurado());
 		seguradoDAO = new SeguradoDAO();
+		listSeguradosFiltrados = new ArrayList<Segurado>();
 		setListSegurados(seguradoDAO.findAll(new Segurado()));
+		cpfEdicao = "";
 	}
 	
 	/**
@@ -38,7 +44,37 @@ public class SeguradoController {
 	 * @return 
 	 */
 	public String salvarSegurado() {
-		seguradoDAO.save(segurado);
+		
+		boolean temErro = false;
+		String msg = "";
+		
+		try {
+			seguradoDAO.save(segurado);
+		} catch (Exception e) {
+			if(e.getMessage().contains("SQLIntegrityConstraintViolationException")) {
+				msg = "Já existe um segurado cadastrado para este CPF!";
+			}
+			temErro = true;			
+		}
+		
+		if(temErro) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true);
+			FacesMessage message = null;
+			if(msg.equals("")) {
+				message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro inesperado, por favor, contate o suporte!");
+			} else {
+				message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", msg);
+			}
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+			throw new RuntimeException("");
+		} else {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro salvo com sucesso!" );
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		}
+		
 		segurado = new Segurado();
 		return "segurados";
 	}
@@ -62,6 +98,7 @@ public class SeguradoController {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "O registro não pode "
 					+ "ser removido pois o mesmo possui dependências!");
 			RequestContext.getCurrentInstance().showMessageInDialog(message);
+//			throw new RuntimeException("");
 		} else {
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.getFlash().setKeepMessages(true); 
@@ -80,13 +117,13 @@ public class SeguradoController {
 	 * @return
 	 */
 	public String editarSegurado(Segurado seg)	{
-		System.out.println(seg);
 		segurado = seg;
-		
 		stExibeRelatorio = false;
+		cpfEdicao = seg.getCpf();
 		
 		return null;
 	}
+	
 	
 	public String adicionarSegurado()	{
 		segurado = new Segurado();
@@ -94,6 +131,10 @@ public class SeguradoController {
 		stExibeRelatorio = false;
 		
 		return null;
+	}
+	
+	public String cancelar() {
+		return "segurados";
 	}
 	
 	public Segurado getSegurado() {
@@ -118,6 +159,14 @@ public class SeguradoController {
 
 	public void setStExibeRelatorio(boolean stExibeRelatorio) {
 		this.stExibeRelatorio = stExibeRelatorio;
+	}
+
+	public List<Segurado> getListSeguradosFiltrados() {
+		return listSeguradosFiltrados;
+	}
+
+	public void setListSeguradosFiltrados(List<Segurado> listSeguradosFiltrados) {
+		this.listSeguradosFiltrados = listSeguradosFiltrados;
 	}
 	
 }

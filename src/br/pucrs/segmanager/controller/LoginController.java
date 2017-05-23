@@ -4,8 +4,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.context.RequestContext;
 
 import br.pucrs.segmanager.dao.UsuarioDAO;
 import br.pucrs.segmanager.model.Usuario;
@@ -33,8 +36,10 @@ public class LoginController {
 		Usuario usuarioAux = usuarioDAO.findUsuario(usuario);
 		
 		if(usuarioAux == null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Usuário/senha incorretos!", ""));
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Login/senha inválidos!" );
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
 			return "login";
 		} else {
 			if(usuarioAux.getPerfil().equals("corretor")) {
@@ -52,6 +57,14 @@ public class LoginController {
 			}
 		}
 	}
+	
+	public String logout() {
+		
+//		HttpSession session = SessionUtils.getSession();
+//		session.removeAttribute("usuario");
+		
+		return "login";
+	}	
 
 	public Usuario getUsuario() {
 		return usuario;

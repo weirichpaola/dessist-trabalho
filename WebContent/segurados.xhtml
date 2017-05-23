@@ -21,14 +21,16 @@
 		
 			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'A'}">
 				
-<!-- 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> -->
 				
 				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true" 
 					rendered="#{!seguradoController.stExibeRelatorio}">
+					
+<!-- 					<p:messages showDetail="false" closable="true" showIcon="false"/> -->
+					<p:growl/>
 				
 					<p:outputLabel value="Nome" for="nome" style="width:500px;" /> <br />
 					<p:inputText id="nome" value="#{seguradoController.segurado.nome}" maxlength="100" size="55" 
-						required="true" requiredMessage="Campo Obrigatório" /> 
+						required="true"  /> 
 					<br />
 				
 					<p:outputLabel value="E-mail" for="email" style="width:500px;" /> <br />
@@ -41,41 +43,57 @@
 						maxlength="20" size="20" required="true"/> 
 					<br />
 					
+					<p:outputLabel value="CPF" for="cpf"  style="width:500px;" /> <br />
+					<p:inputText id="cpf" value="#{seguradoController.segurado.cpf}" 
+						maxlength="11" size="20" required="true"/> 
+					<br />
+					
 					<p:outputLabel value="Bônus" for="bonus"  style="width:500px;" /> <br />
 					<p:inputText id="bonus" value="#{seguradoController.segurado.bonus}" 
-						maxlength="6" size="10" required="true"/> <br /> 
+						maxlength="6" size="10" required="true" />  <br />
+						 
 					<br /> 
 					
 					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguradoController.salvarSegurado}" 
 						update="btnSalvar, segurados, formulario"/>
 						
 					<p:commandButton id="btnRemover" value="Remover" action="#{seguradoController.removerSegurado}" 
-						update="btnSalvar, segurados, formulario" immediate="true"/>	
+						update="btnSalvar, segurados, formulario" immediate="true"/>
+						
+					<p:commandButton id="btnCancelar" value="Cancelar" action="#{seguradoController.cancelar}" 
+						update="btnSalvar, segurados, formulario" immediate="true"/>		
 				
 				</p:panel>
 			
-				<p:panel id="relatorio"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true"
+				<p:panel id="relatorio"  collapsed="false" header="Segurados" toggleable="true"
 					rendered="#{seguradoController.stExibeRelatorio}" >
-					<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">
-						<p:column headerText="Nome" sortable="true" sortBy="#{seg.nome}">
+					<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}" 
+						 emptyMessage="Nenhum registro encontrado." >
+						
+						<p:column headerText="Nome" sortable="true" sortBy="#{seg.nome}" width="25%">
 							<h:outputText value="#{seg.nome}" />
 						</p:column>
 						
-						<p:column headerText="E-mail" sortable="true" sortBy="#{seg.email}">
+						<p:column headerText="CPF" sortable="true" sortBy="#{seg.cpf}" width="20%">
+							<h:outputText value="#{seg.cpf}" />
+						</p:column>
+						
+						<p:column headerText="E-mail" sortable="true" sortBy="#{seg.email}" width="25%">
 							<h:outputText value="#{seg.email}" />
 						</p:column>
 						
-						<p:column headerText="Telefone" sortable="true" sortBy="#{seg.telefone}">
+						<p:column headerText="Telefone" sortable="true" sortBy="#{seg.telefone}" width="10%">
 							<h:outputText value="#{seg.telefone}" />
 						</p:column>
 						
-						<p:column headerText="Bônus" sortable="true" sortBy="#{seg.bonus}">
+						<p:column headerText="Bônus" sortable="true" sortBy="#{seg.bonus}" width="10%">
 							<h:outputText value="#{seg.bonus}" />
 						</p:column>
 						
-						<p:column headerText="Ações" sortable="false" >
+						<p:column headerText="Ações" sortable="false" width="10%">
 							<p:commandButton id="btnEditar" value="Editar" action="#{seguradoController.editarSegurado(seg)}" 
-						update="segurados, formulario"/> 
+						update="segurados, formulario"/>
+						 
 						</p:column>
 						
 					</p:dataTable>

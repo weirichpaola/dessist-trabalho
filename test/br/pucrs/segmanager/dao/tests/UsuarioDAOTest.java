@@ -35,8 +35,8 @@ public class UsuarioDAOTest {
 		usuario.setSenha("1");
 		
 		Usuario findUsuario = daoTest.findUsuario(usuario);
-		
 		assertNotNull(findUsuario);
 	}
-
+	
+		
 }
