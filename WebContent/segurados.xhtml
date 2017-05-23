@@ -21,7 +21,7 @@
 		
 			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'A'}">
 				
-				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+<!-- 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> -->
 				
 				<p:panel id="formulario"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true" 
 					rendered="#{!seguradoController.stExibeRelatorio}">
@@ -32,23 +32,28 @@
 					<br />
 				
 					<p:outputLabel value="E-mail" for="email" style="width:500px;" /> <br />
-					<p:inputText id="email" value="#{seguradoController.segurado.email}" maxlength="100" size="55" /> 
+					<p:inputText id="email" value="#{seguradoController.segurado.email}" 
+						maxlength="100" size="55" required="true"/> 
 					<br />
 					
 					<p:outputLabel value="Telefone" for="telefone"  style="width:500px;" /> <br />
-					<p:inputText id="telefone" value="#{seguradoController.segurado.telefone}" maxlength="20" size="20" /> 
+					<p:inputText id="telefone" value="#{seguradoController.segurado.telefone}" 
+						maxlength="20" size="20" required="true"/> 
 					<br />
 					
 					<p:outputLabel value="Bônus" for="bonus"  style="width:500px;" /> <br />
-					<p:inputText id="bonus" value="#{seguradoController.segurado.bonus}" maxlength="6" size="10" /> <br /> 
+					<p:inputText id="bonus" value="#{seguradoController.segurado.bonus}" 
+						maxlength="6" size="10" required="true"/> <br /> 
 					<br /> 
 					
 					<p:commandButton id="btnSalvar" value="Salvar" action="#{seguradoController.salvarSegurado}" 
 						update="btnSalvar, segurados, formulario"/>
+						
+					<p:commandButton id="btnRemover" value="Remover" action="#{seguradoController.removerSegurado}" 
+						update="btnSalvar, segurados, formulario" immediate="true"/>	
 				
 				</p:panel>
 			
-				<p:commandButton value="#{loginController.usuario.perfil}"/> <br />
 				<p:panel id="relatorio"  collapsed="false" header="Cadastro/Edição de Segurado" toggleable="true"
 					rendered="#{seguradoController.stExibeRelatorio}" >
 					<p:dataTable id="segurados" var="seg" value="#{seguradoController.listSegurados}">

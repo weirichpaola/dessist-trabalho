@@ -6,8 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import br.pucrs.segmanager.dao.SeguradoDAO;
 import br.pucrs.segmanager.dao.SeguradoraDAO;
@@ -63,6 +68,37 @@ public class SeguroController {
 	 */
 	public String salvarSeguro() {
 		seguroDAO.save(seguro);
+		seguro = new Seguro();
+		return "seguros";
+	}
+	
+	/**
+	 * Método que remover um Seguro
+	 * @return 
+	 */
+	public String removerSeguro() {
+		boolean temErro = false;
+		try {
+			seguroDAO.delete(seguro);
+		} catch (Exception e) {
+			temErro = true;
+		}
+		
+		if(temErro) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "O registro não pode "
+					+ "ser removido pois o mesmo possui dependências!");
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		} else {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro removido com sucesso!" );
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		}
+		
 		seguro = new Seguro();
 		return "seguros";
 	}

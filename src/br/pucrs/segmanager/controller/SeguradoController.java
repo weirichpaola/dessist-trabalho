@@ -3,8 +3,13 @@ package br.pucrs.segmanager.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import br.pucrs.segmanager.dao.SeguradoDAO;
 import br.pucrs.segmanager.model.Segurado;
@@ -34,6 +39,37 @@ public class SeguradoController {
 	 */
 	public String salvarSegurado() {
 		seguradoDAO.save(segurado);
+		segurado = new Segurado();
+		return "segurados";
+	}
+	
+	/**
+	 * Método que remove um Segurado
+	 * @return 
+	 */
+	public String removerSegurado() {
+		boolean temErro = false;
+		try {
+			seguradoDAO.delete(segurado);
+		} catch (Exception e) {
+			temErro = true;
+		}
+		
+		if(temErro) {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "O registro não pode "
+					+ "ser removido pois o mesmo possui dependências!");
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		} else {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.getFlash().setKeepMessages(true); 
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro removido com sucesso!" );
+			RequestContext.getCurrentInstance().showMessageInDialog(message);
+		}
+		
 		segurado = new Segurado();
 		return "segurados";
 	}
