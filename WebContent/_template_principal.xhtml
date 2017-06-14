@@ -19,7 +19,11 @@
 				        <f:param name="i" value="1" />
 				    </p:menuitem>
 				    
-				    <p:menuitem value="Meus Seguros" outcome="seguros.xhtml" rendered="#{loginController.perfil eq 'C'}">
+				    <p:menuitem value="Meus Seguros" outcome="meusseguros.xhtml" rendered="#{loginController.perfil eq 'C'}">
+				        <f:param name="i" value="2" />
+				    </p:menuitem>
+				    
+				    <p:menuitem value="Sair" outcome="login.xhtml" >
 				        <f:param name="i" value="2" />
 				    </p:menuitem>
 				    

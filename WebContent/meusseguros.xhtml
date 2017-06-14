@@ -18,7 +18,48 @@
 		</ui:define>
 
 		<ui:define name="conteudo">
-			<p:outputLabel value="Em breve..."></p:outputLabel>		
+			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'C'}">
+				
+				<p:panel id="relatorio"  collapsed="false" header="Seguros" toggleable="true" >
+					
+					<p:dataTable id="seguros" var="seg" value="#{seguroController.segurosDoSegurado}">
+						
+						
+						<p:column headerText="Seguradora" sortable="true" sortBy="#{seg.seguradora.nome}" width="20%">
+							<h:outputText value="#{seg.seguradora.nome}" />
+						</p:column>
+						
+						<p:column headerText="Bem" sortable="true" sortBy="#{seg.bem.descricao}">
+							<h:outputText value="#{seg.bem}" />
+						</p:column>
+						
+						<p:column headerText="Início Vigência" sortable="true" sortBy="#{seg.dtInicioVigencia}" width="13%">
+							<h:outputText value="#{seg.dtInicioVigencia}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Fim Vigência" sortable="true" sortBy="#{seg.dtFimVigencia}" width="12%">
+							<h:outputText value="#{seg.dtFimVigencia}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Valor" sortable="true" sortBy="#{seg.vlTotal}" width="10%">
+							<h:outputText value="R$ #{seg.vlTotal}" />
+						</p:column>
+
+
+						<p:column headerText="Ações" sortable="false" width="8%">
+							<p:commandButton id="btnEditar" value="Editar" action="#{seguroController.editarSeguro(seg)}" 
+						update="seguros, formulario"/> 
+						</p:column>
+						
+					</p:dataTable>
+					
+				</p:panel>
+			
+			</h:form>		
 		</ui:define>
 		
 		</ui:composition>

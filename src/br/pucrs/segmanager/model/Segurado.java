@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +25,9 @@ public class Segurado {
 	@GeneratedValue(generator="SEG_SQ_SEGURADO")
     @SequenceGenerator(name="SEG_SQ_SEGURADO",sequenceName="SEG_SQ_SEGURADO", allocationSize=1, initialValue=1)
 	private Long id;
+	
+	@JoinColumn(name="ID_USUARIO")
+	private Usuario usuario;
 	
 	@Column(name = "TX_NOME")
 	private String nome;
@@ -119,6 +123,14 @@ public class Segurado {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

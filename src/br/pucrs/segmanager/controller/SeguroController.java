@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
@@ -20,6 +21,8 @@ import br.pucrs.segmanager.dao.SeguroDAO;
 import br.pucrs.segmanager.model.Segurado;
 import br.pucrs.segmanager.model.Seguradora;
 import br.pucrs.segmanager.model.Seguro;
+import br.pucrs.segmanager.model.Usuario;
+import br.pucrs.segmanager.utils.SessionUtils;
 
 @SuppressWarnings("rawtypes")
 @ManagedBean(name="seguroController")
@@ -34,6 +37,8 @@ public class SeguroController {
 	private List<String> seguradoras2; //exibicao - valor
 	private Map<String, Segurado> segurados;
 	
+	private List<Seguro> segurosDoSegurado;
+	
 	private List<Seguro> listSeguros;
 	private boolean stExibeRelatorio = true;
 	
@@ -44,6 +49,7 @@ public class SeguroController {
 		seguroDAO = new SeguroDAO();
 		seguradoraDAO = new SeguradoraDAO();
 		seguradoDAO = new SeguradoDAO();
+		setSegurosDoSegurado(new ArrayList<Seguro>());
 		
 		setSegurados(new HashMap<String, Segurado>());
 		setSeguradoras(new HashMap<String, Seguradora>());
@@ -60,6 +66,8 @@ public class SeguroController {
 			Seguradora aux = (Seguradora) s;
 			getSeguradoras().put(aux.getNome(), aux);
 		}
+		
+		buscarSegurosDoSegurado();
 	}
 	
 	/**
@@ -157,6 +165,20 @@ public class SeguroController {
 		return null;
 	}
 	
+	public void buscarSegurosDoSegurado() {
+		
+		HttpSession session = SessionUtils.getSession();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		Segurado segurado = new Segurado();
+		segurado.setUsuario(usuario);
+
+		if(usuario.getPerfil().equals("C")) {
+			setSegurosDoSegurado(seguroDAO.findSegurosBySegurado(segurado));
+		}
+		
+	}
+	
 	public Seguro getSeguro() {
 		return seguro;
 	}
@@ -203,6 +225,14 @@ public class SeguroController {
 
 	public void setSeguradoras2(List<String> seguradoras2) {
 		this.seguradoras2 = seguradoras2;
+	}
+
+	public List<Seguro> getSegurosDoSegurado() {
+		return segurosDoSegurado;
+	}
+
+	public void setSegurosDoSegurado(List<Seguro> segurosDoSegurado) {
+		this.segurosDoSegurado = segurosDoSegurado;
 	}
 	
 }

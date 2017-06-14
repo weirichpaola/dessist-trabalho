@@ -12,6 +12,7 @@ import org.primefaces.context.RequestContext;
 
 import br.pucrs.segmanager.dao.UsuarioDAO;
 import br.pucrs.segmanager.model.Usuario;
+import br.pucrs.segmanager.resources.MailBuilder;
 import br.pucrs.segmanager.utils.SessionUtils;
 
 
@@ -50,12 +51,18 @@ public class LoginController {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("usuario", usuarioAux);
 			
+			MailBuilder mb = new MailBuilder();
+			mb.addAssunto("Login Efetuado").addFrom("segmanager@gmail.com").addMensagem("Login efetuadoo!")
+					.addTo("nelsoncardosoo@gmail.com").enviarEmail();
+			
 			if(perfil.equals("A")) {
 				return "segurados";
 			} else {
 				return "meusseguros";
 			}
 		}
+		
+		
 	}
 	
 	public String logout() {
