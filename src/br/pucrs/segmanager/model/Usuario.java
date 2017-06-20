@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +27,9 @@ public class Usuario {
 	
 	@Column(name="TX_PERFIL")
 	private String perfil;
+	
+	@JoinColumn(name="ID_SEGURADO")
+	private Segurado segurado;
 
 	public Long getId() {
 		return id;
@@ -57,6 +61,14 @@ public class Usuario {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+
+	public Segurado getSegurado() {
+		return segurado;
+	}
+
+	public void setSegurado(Segurado segurado) {
+		this.segurado = segurado;
 	}
 	
 	

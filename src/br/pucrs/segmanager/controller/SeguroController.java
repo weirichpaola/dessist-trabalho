@@ -88,7 +88,7 @@ public class SeguroController {
 			externalContext.getFlash().setKeepMessages(true); 
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro inesperado, por favor, contate o suporte!");
 			RequestContext.getCurrentInstance().showMessageInDialog(message);
-			throw new RuntimeException("");
+			throw new RuntimeException(""); 
 		} else {
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.getFlash().setKeepMessages(true); 
@@ -145,7 +145,7 @@ public class SeguroController {
 		seguro = new Seguro();
 		return "seguros";
 	}
-	
+	 
 	/**
 	 * Seleciona um seguro para edição.
 	 * @param seg
@@ -170,10 +170,9 @@ public class SeguroController {
 		HttpSession session = SessionUtils.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
-		Segurado segurado = new Segurado();
-		segurado.setUsuario(usuario);
+		Segurado segurado = usuario.getSegurado();
 
-		if(usuario.getPerfil().equals("C")) {
+		if(usuario.getPerfil().equals("segurado")) {
 			setSegurosDoSegurado(seguroDAO.findSegurosBySegurado(segurado));
 		}
 		

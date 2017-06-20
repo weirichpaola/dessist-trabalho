@@ -51,9 +51,9 @@ public class LoginController {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("usuario", usuarioAux);
 			
-			MailBuilder mb = new MailBuilder();
-			mb.addAssunto("Login Efetuado").addFrom("segmanager@gmail.com").addMensagem("Login efetuadoo!")
-					.addTo("nelsoncardosoo@gmail.com").enviarEmail();
+//			MailBuilder mb = new MailBuilder();
+//			mb.addAssunto("Login Efetuado").addFrom("segmanager@gmail.com").addMensagem("Login efetuadoo!")
+//					.addTo("nelsoncardosoo@gmail.com").enviarEmail();
 			
 			if(perfil.equals("A")) {
 				return "segurados";

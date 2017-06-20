@@ -26,9 +26,6 @@ public class Segurado {
     @SequenceGenerator(name="SEG_SQ_SEGURADO",sequenceName="SEG_SQ_SEGURADO", allocationSize=1, initialValue=1)
 	private Long id;
 	
-	@JoinColumn(name="ID_USUARIO")
-	private Usuario usuario;
-	
 	@Column(name = "TX_NOME")
 	private String nome;
 	
@@ -125,12 +122,4 @@ public class Segurado {
 		this.cpf = cpf;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
 }
