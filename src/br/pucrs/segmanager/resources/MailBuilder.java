@@ -94,8 +94,9 @@ public class MailBuilder {
 			message.setSubject(assunto);
 			message.setText(mensagem);
 			
-			if(temAnexo)
-			message.setContent(multipart);
+			if(temAnexo) {
+				message.setContent(multipart);
+			}
 
 			Transport.send(message);
 

@@ -1,0 +1,3 @@
+INSERT INTO SEG_USUARIO_TST VALUES (1, 'nelson', '1', 'corretor', null); 
+INSERT INTO SEG_USUARIO_TST VALUES (2, 'gustavo', '1', 'corretor', null); 
+INSERT INTO SEG_USUARIO_TST VALUES (3, 'paola', '1', 'segurado', '8'); 
