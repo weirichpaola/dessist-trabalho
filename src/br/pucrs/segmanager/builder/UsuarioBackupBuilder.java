@@ -7,7 +7,7 @@ public class UsuarioBackupBuilder {
 	private StringBuilder insert;
 	
 	public UsuarioBackupBuilder(Usuario u) {
-		insert = new StringBuilder("INSERT INTO SEG_USUARIO_TST VALUES (");
+		insert = new StringBuilder("INSERT INTO SEG_USUARIO VALUES (");
 		saveId(u).saveEmail(u).saveSenha(u).savePerfil(u).saveSegurado(u);
 	}
 	
@@ -33,7 +33,7 @@ public class UsuarioBackupBuilder {
 	
 	private UsuarioBackupBuilder saveSegurado(Usuario u) {
 		if(u.getSegurado() != null) {
-			insert.append("'" + u.getSegurado().getId() + "'); ");
+			insert.append(u.getSegurado().getId() + "); \n");
 		} else {
 			insert.append("null); \n");
 		}

@@ -1,3 +1,16 @@
-INSERT INTO SEG_USUARIO_TST VALUES (1, 'nelson', '1', 'corretor', null); 
-INSERT INTO SEG_USUARIO_TST VALUES (2, 'gustavo', '1', 'corretor', null); 
-INSERT INTO SEG_USUARIO_TST VALUES (3, 'paola', '1', 'segurado', '8'); 
+2017-06-29 20:43:07.03
+INSERT INTO SEG_USUARIO VALUES (1, 'nelson', '1', 'corretor', null); 
+INSERT INTO SEG_USUARIO VALUES (2, 'gustavo', '1', 'corretor', null); 
+INSERT INTO SEG_USUARIO VALUES (3, 'paola', '1', 'segurado', 8); 
+INSERT INTO SEG_SEGURADO VALUES (17, 'Pedro da Silva', 'teste', '999999991', 2, 777); 
+ INSERT INTO SEG_SEGURADO VALUES (12, 'Gustavo Kath', 'gustavo.kath@acad.pucrs.br', '999998888', 0, 6782); 
+ INSERT INTO SEG_SEGURADO VALUES (8, 'Paola Weirich', 'paola.salvador@acad.pucrs.br', '999997777', 12, 234); 
+ INSERT INTO SEG_SEGURADO VALUES (15, 'Marcelo', 'yamaguti@pucrs.br', '999996666', 1, 0987); 
+ INSERT INTO SEG_SEGURADO VALUES (16, 'Maria da Silva', 'mariadasilva@gmail.com', '999999', 1, 999); 
+ INSERT INTO SEG_SEGURADORA VALUES (99, 'Seguradora 1'); 
+ INSERT INTO SEG_SEGURADORA VALUES (100, 'Seguradora 2'); 
+ INSERT INTO SEG_SEGURO VALUES (99999, 8, 100, 'Ferrari Enzo', 30000, 'Teste de Seguro 1', '31/00/2017', '31/00/2017', 'Estado', '11/00/2017', 1100, 700); 
+ INSERT INTO SEG_SEGURO VALUES (3, 15, 99, 'Apartamento 1', 40000, null, '01/00/2017', '31/00/2017', null, '10/00/2017', null, null); 
+ INSERT INTO SEG_SEGURO VALUES (4, 12, 99, 'Carro', 2000, null, '01/00/2017', '31/00/2017', null, '16/00/2017', null, null); 
+ INSERT INTO SEG_SEGURO VALUES (5, 16, 99, 'Casa', 1000, null, '24/00/2017', '25/00/2017', null, '23/00/2017', null, null); 
+ 

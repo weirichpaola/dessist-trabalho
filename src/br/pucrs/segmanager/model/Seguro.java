@@ -36,7 +36,7 @@ public class Seguro {
 	@JoinColumn(name="ID_SEGURADORA")
 	private Seguradora seguradora;
 	
-	//TODO: Para a próxima versão, será criados objetos para os Bens
+	//TODO: Para a próxima versão, será criado objetos para os Bens
 	@Column(name="TX_BEM")
 	private String bem;
 	
