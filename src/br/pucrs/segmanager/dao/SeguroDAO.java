@@ -25,5 +25,4 @@ public class SeguroDAO extends GenericDAO {
 		return query.getResultList();
 
 	}
-
 }

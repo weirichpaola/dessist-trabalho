@@ -21,7 +21,19 @@
 		
 			<h:form id="formulario" enctype="multipart/form-data" rendered="#{loginController.perfil eq 'A'}">
 				
-				<p:commandButton value="Efetuar Backup" action="#{adminController.efetuarBackup}"/>
+				<p:panel id="formulario"  collapsed="false" header="Painel de Admistração" toggleable="true" >
+					
+					<p:growl/>
+					
+					<p:commandButton value="Efetuar Backup" action="#{adminController.efetuarBackup}" update="backupEm"/> 
+					<p:outputLabel id="backupEm" value="#{adminController.ultimoBackupEm}" />
+						
+						<br /> <br /><br /><br />
+					<p:commandButton value="Efetuar Restore" action="#{adminController.efetuarRestore}"/>
+							
+				
+				</p:panel>
+							
 							
 			</h:form>	
 		</ui:define>

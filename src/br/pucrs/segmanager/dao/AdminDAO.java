@@ -16,17 +16,21 @@ import br.pucrs.segmanager.model.Usuario;
 
 public class AdminDAO<E> extends GenericDAO<E>{
 
+	/**
+	 *
+	 * @return scripts de insert no banco de dados de acordo com os dados atuais
+	 */
 	public StringBuilder gerarBackup() {
 		StringBuilder sb = new StringBuilder();
 		
-		Usuario usuario = new Usuario();
+//		Usuario usuario = new Usuario();
 		Segurado segurado = new Segurado();
 		Seguradora seguradora = new Seguradora();
 		Seguro seguro = new Seguro();
 
 		// FIXME substituir por algum método usando reflection
 		List<Object> entrada = new ArrayList<>();
-		entrada.add(usuario);
+//		entrada.add(usuario);
 		entrada.add(segurado);
 		entrada.add(seguradora);
 		entrada.add(seguro);
@@ -48,6 +52,10 @@ public class AdminDAO<E> extends GenericDAO<E>{
 		return sb;
 	}
 	
+	/**
+	 * Mpetodo que efetua o restore do banco de dados, a partir do backup efetuado anteriormente.
+	 * @param inserts
+	 */
 	public void efetuarRestore(List<String> inserts) {
 		em.getTransaction().begin();
 
