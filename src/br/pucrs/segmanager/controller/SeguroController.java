@@ -78,6 +78,10 @@ public class SeguroController {
 		beforeSave();
 		boolean temErro = false;
 		try {
+			if(seguro.getStNotificado() == null) {
+				seguro.setStNotificado("N");
+			}
+			
 			seguroDAO.save(seguro);
 		} catch (Exception e) {
 			temErro = true;

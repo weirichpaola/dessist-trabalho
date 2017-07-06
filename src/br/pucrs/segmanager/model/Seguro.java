@@ -66,6 +66,9 @@ public class Seguro {
 	
 	@Column(name="VL_FRANQUIA")
 	private BigDecimal vlFranquia;
+	
+	@Column(name="ST_NOTIFICADO")
+	private String stNotificado;
 
 	public Long getId() {
 		return id;
@@ -161,6 +164,14 @@ public class Seguro {
 
 	public void setVlFranquia(BigDecimal vlFranquia) {
 		this.vlFranquia = vlFranquia;
+	}
+
+	public String getStNotificado() {
+		return stNotificado;
+	}
+
+	public void setStNotificado(String stNotificado) {
+		this.stNotificado = stNotificado;
 	}
 
 }

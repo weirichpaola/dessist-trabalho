@@ -25,4 +25,20 @@ public class SeguroDAO extends GenericDAO {
 		return query.getResultList();
 
 	}
+	
+	public List<Seguro> findSegurosSemNotificacao() {
+
+		StringBuilder hql = new StringBuilder();
+
+		hql.append("select s ");
+		hql.append("  from Seguro s ");
+		hql.append(" where s.stNotificado = :notificado ");
+		
+		Query query = em.createQuery(hql.toString());
+		
+		query.setParameter("notificado", "N");
+		
+		return query.getResultList();
+
+	}
 }

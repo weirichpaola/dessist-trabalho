@@ -29,8 +29,15 @@
 					<p:outputLabel id="backupEm" value="#{adminController.ultimoBackupEm}" />
 						
 						<br /> <br /><br /><br />
-					<p:commandButton value="Efetuar Restore" action="#{adminController.efetuarRestore}"/>
-							
+					<p:commandButton value="Efetuar Restore" action="#{adminController.efetuarRestore}">
+						<p:confirm header="Atenção!" icon="ui-icon-alert" 
+						message="Esta ação apagará todos os dados atuais e irá restaurar o último backup efetuado. Você tem certeza?" />
+					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				       <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				       <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				   </p:confirmDialog>
 				
 				</p:panel>
 							

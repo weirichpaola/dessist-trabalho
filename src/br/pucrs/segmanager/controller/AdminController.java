@@ -50,11 +50,9 @@ public class AdminController {
 		String dataDoBackup = timestamp.toString() + "\n";
 
 		inserts.append(dataDoBackup).append(dao.gerarBackup());
-
-		// mail.addFrom("ssegmanager@gmail.com").addAssunto("Backup do
-		// sistema").addMensagem(inserts.toString()).addTo("nelsoncardosoo@gmail.com").enviarEmail();
-
-		System.out.println(dataDoBackup);
+//		MailBuilder mail = new MailBuilder();
+//		mail.addFrom("ssegmanager@gmail.com").addAssunto("Backup do sistema.").addMensagem(inserts.toString())
+//				.addTo("nelsoncardosoo@gmail.com").enviarEmail();
 
 		try {
 			Files.write(Paths.get(BACKUP_FILE), inserts.toString().getBytes());
@@ -114,6 +112,7 @@ public class AdminController {
 		return "admin";
 	}
 
+	@SuppressWarnings("resource")
 	public String getUltimoBackupEm() {
 		BufferedReader brTest = null;
 		try {
@@ -121,6 +120,7 @@ public class AdminController {
 			ultimoBackupEm = brTest.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "Nenhum arquivo de backup localizado!";
 		}
 
 		return ("Último backup efetuado em " + ultimoBackupEm.substring(8, 10) + "/" + ultimoBackupEm.substring(5, 7)

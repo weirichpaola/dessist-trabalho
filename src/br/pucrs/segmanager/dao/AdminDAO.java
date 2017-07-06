@@ -27,10 +27,11 @@ public class AdminDAO<E> extends GenericDAO<E>{
 		Segurado segurado = new Segurado();
 		Seguradora seguradora = new Seguradora();
 		Seguro seguro = new Seguro();
+		Usuario usuario = new Usuario();
 
 		// FIXME substituir por algum método usando reflection
 		List<Object> entrada = new ArrayList<>();
-//		entrada.add(usuario);
+		entrada.add(usuario);
 		entrada.add(segurado);
 		entrada.add(seguradora);
 		entrada.add(seguro);
@@ -57,14 +58,35 @@ public class AdminDAO<E> extends GenericDAO<E>{
 	 * @param inserts
 	 */
 	public void efetuarRestore(List<String> inserts) {
-		em.getTransaction().begin();
-
-		for(String insert : inserts) {
-			Query nativeQuery = em.createNativeQuery(insert.replace(";", ""));
-			nativeQuery.executeUpdate();			
+		try{
+			em.getTransaction().begin();
+			
+			Query query = em.createNativeQuery("delete from seg_seguro");
+			query.executeUpdate();
+			
+			query = em.createNativeQuery("delete from seg_seguradora");
+			query.executeUpdate();
+			
+			query = em.createNativeQuery("delete from seg_segurado");
+			query.executeUpdate();
+			
+			query = em.createNativeQuery("delete from seg_usuario");
+			query.executeUpdate();
+			
+			for(String insert : inserts) {
+				if(!insert.contains("INSERT")) {
+					continue;
+				}
+				Query nativeQuery = em.createNativeQuery(insert.replace(";", ""));
+				nativeQuery.executeUpdate();			
+			}
+			
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		} finally {
 		}
-		
-		em.getTransaction().commit();
 	}
 	
 }

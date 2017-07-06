@@ -12,7 +12,7 @@ public class SeguroBackupBuilder {
 	public SeguroBackupBuilder(Seguro s) {
 		insert = new StringBuilder("INSERT INTO SEG_SEGURO VALUES (");
 		saveId(s).saveSegurado(s).saveSeguradora(s).saveBem(s).saveVlTotal(s).saveApolice(s).saveDtInicio(s)
-				.saveDtFim(s).saveEstado(s).saveDtEmissao(s).saveVlComissao(s).saveVlFranquia(s);
+				.saveDtFim(s).saveEstado(s).saveDtEmissao(s).saveVlComissao(s).saveVlFranquia(s).saveStNotificado(s);
 	}
 
 	private SeguroBackupBuilder saveId(Seguro s) {
@@ -80,7 +80,12 @@ public class SeguroBackupBuilder {
 	}
 
 	private SeguroBackupBuilder saveVlFranquia(Seguro s) {
-		insert.append(s.getVlFranquia() + "); \n ");
+		insert.append(s.getVlFranquia() + ", ");
+		return this;
+	}
+	
+	private SeguroBackupBuilder saveStNotificado(Seguro s) {
+		insert.append("'" + s.getStNotificado() + "'); \n ");
 		return this;
 	}
 

@@ -1,4 +1,4 @@
-2017-07-06 19:32:39.978
+2017-07-04 21:30:00.848
 INSERT INTO SEG_USUARIO VALUES (1, 'nelson', '1', 'corretor', null); 
 INSERT INTO SEG_USUARIO VALUES (2, 'gustavo', '1', 'corretor', null); 
 INSERT INTO SEG_USUARIO VALUES (3, 'paola', '1', 'segurado', 8); 
@@ -9,8 +9,8 @@ INSERT INTO SEG_SEGURADO VALUES (17, 'Pedro da Silva', 'nelsoncardosoo@gmail.com
  INSERT INTO SEG_SEGURADO VALUES (16, 'Maria da Silva', 'nelsoncardosoo@gmail.com', '999999', 1, 999); 
  INSERT INTO SEG_SEGURADORA VALUES (99, 'Seguradora 1'); 
  INSERT INTO SEG_SEGURADORA VALUES (100, 'Seguradora 2'); 
- INSERT INTO SEG_SEGURO VALUES (99999, 8, 100, 'Ferrari Enzo', 30000, 'Teste de Seguro 1', '31/12/2017', '10/10/2017', 'Estado', '11/01/2017', 1100, 700, 'N'); 
- INSERT INTO SEG_SEGURO VALUES (3, 15, 99, 'Apartamento 1', 40000, null, '01/01/2017', '10/10/2017', null, '10/01/2017', null, null, 'N'); 
+ INSERT INTO SEG_SEGURO VALUES (99999, 8, 100, 'Ferrari Enzo', 30000, 'Teste de Seguro 1', '31/12/2017', '10/10/2017', 'Estado', '11/01/2017', 1100, 700, 'S'); 
+ INSERT INTO SEG_SEGURO VALUES (3, 15, 99, 'Apartamento 1', 40000, null, '01/01/2017', '10/10/2017', null, '10/01/2017', null, null, 'S'); 
  INSERT INTO SEG_SEGURO VALUES (4, 12, 99, 'Carro', 2000, null, '01/05/2017', '04/07/2017', null, '16/05/2017', null, null, 'S'); 
- INSERT INTO SEG_SEGURO VALUES (5, 16, 99, 'Casa', 1000, null, '24/05/2017', '10/10/2017', null, '23/05/2017', null, null, 'N'); 
+ INSERT INTO SEG_SEGURO VALUES (5, 16, 99, 'Casa', 1000, null, '24/05/2017', '10/10/2017', null, '23/05/2017', null, null, 'S'); 
  
